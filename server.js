@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config()
+require('dotenv').config(); // Load environment variables
 
-const { organizeNotesByTopic } = require('./backend-services/openAIService'); // Assuming you already have this function
+// Log the OpenAI API Key to check if it's set correctly
+console.log('OpenAI API Key:', process.env.OPENAI_API_KEY);
+
+const { organizeNotesByTopic } = require('./backend-services/openAIService'); // Ensure this function is correctly implemented
 
 const app = express();
 app.use(cors({
@@ -12,8 +15,6 @@ app.use(cors({
 }));
 
 app.use(express.json()); // Middleware to parse JSON body data
-
-
 
 // API endpoint to handle the transcript and generate notes
 app.post('/transcribe', async (req, res) => {
