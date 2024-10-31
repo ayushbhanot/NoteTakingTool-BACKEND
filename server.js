@@ -1,11 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config()
 
 const { organizeNotesByTopic } = require('./backend-services/openAIService'); // Assuming you already have this function
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ['*'], // Replace with your frontend’s URL
+    methods: ['POST', 'GET'],
+    credentials: true
+}));
+
 app.use(express.json()); // Middleware to parse JSON body data
 
 
