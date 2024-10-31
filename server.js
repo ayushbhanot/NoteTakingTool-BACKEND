@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config(); // Load environment variables
+const serverless = require('serverless-http'); // Import serverless-http
 
 // Log the OpenAI API Key to check if it's set correctly
 console.log('OpenAI API Key:', process.env.OPENAI_API_KEY);
@@ -38,8 +39,4 @@ app.post('/transcribe', async (req, res) => {
     }
 });
 
-// Start the server
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+module.exports.handler = serverless(app); // Export the handler for Vercel
